@@ -12,6 +12,33 @@ export default function WordleGame() {
     letterPosition: 0,
   });
 
+  const onEnter = () => {
+    if (currentGuess.letterPosition < 5) return;
+    setCurrentGuess({ guess: currentGuess.guess + 1, letterPosition: 0 });
+  };
+
+  const onDelete = () => {
+    if (currentGuess.letterPosition === 0) return;
+    const newGameboard = [...gameboard];
+    newGameboard[currentGuess.guess][currentGuess.letterPosition - 1] = '';
+    setCurrentGuess({
+      ...currentGuess,
+      letterPosition: currentGuess.letterPosition - 1,
+    });
+    setGameboard(newGameboard);
+  };
+
+  const onLetter = (keyValue) => {
+    if (currentGuess.letterPosition > 4) return;
+    const newGameboard = [...gameboard];
+    newGameboard[currentGuess.guess][currentGuess.letterPosition] = keyValue;
+    setGameboard(newGameboard);
+    setCurrentGuess({
+      ...currentGuess,
+      letterPosition: currentGuess.letterPosition + 1,
+    });
+  };
+
   return (
     <>
       <nav>
@@ -23,6 +50,9 @@ export default function WordleGame() {
           setGameboard,
           currentGuess,
           setCurrentGuess,
+          onDelete,
+          onEnter,
+          onLetter
         }}
       >
         <div className="game">
