@@ -1,7 +1,35 @@
+import { useCallback, useContext, useEffect } from 'react';
 import Key from './Key';
+import { AppContext } from './WordleGame';
 
 const keyboard = ['qwertzuiopü', 'asdfghjklöä', 'yxcvbnm'];
 export default function Keyboard() {
+  const { onEnter, onDelete, onLetter } = useContext(AppContext);
+
+  const handleUserKeyPress = useCallback((event) => {
+    if (event.key === 'Enter') {
+      onEnter();
+    } else if (event.key === 'Backspace') {
+      onDelete();
+    } else {
+      keyboard.map((keys) =>
+        keys.split('').forEach((key) => {
+          if (event.key === key) {
+            onLetter(key);
+          }
+        })
+      );
+    }
+  });
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleUserKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleUserKeyPress);
+    };
+  }, [handleUserKeyPress]);
+
   return (
     <div className="keyboard">
       {keyboard.map((keys, indexRow) => (
