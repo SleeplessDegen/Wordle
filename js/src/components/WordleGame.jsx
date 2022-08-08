@@ -18,13 +18,14 @@ export default function WordleGame() {
     gameOver: false,
     wordGuessed: false,
   });
-
-  const correctWord = 'falte'.toLowerCase();
+  const [correctWord, setCorrectWord] = useState('');
+  
+  // Einmalig die das wordSet und zu erratene Wort laden und setzen
   useEffect(() => {
     generateWordSet().then((words) => {
-      console.log(words);
       // es wird ein Objekt zurückgegeben, daher muss hier auf das Objekt-Attribut zugegriffen werden
       setWordSet(words.wordSet);
+      setCorrectWord(words.guessMe);
     });
   }, []);
 

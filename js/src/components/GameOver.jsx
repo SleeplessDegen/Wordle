@@ -13,11 +13,11 @@ export default function GameOver() {
       {gameOver.wordGuessed && (
         <h3>Du hast {currentGuess.guess} Versuche gebraucht.</h3>
       )}
-      <button onClick={restartGame()}>Spiel Starten</button>
+      <button onClick={restartGame}>Spiel Starten</button>
     </div>
   );
 }
 
 function restartGame() {
-  console.log('RESTART');
+  window.location.reload(true);
 }

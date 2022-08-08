@@ -18,7 +18,7 @@ export default function Key({ keyValue, big }) {
   cssStyle = big ? `${cssStyle}__big` : cssStyle;
 
   return (
-    <div className={cssStyle} onClick={selectLetter}>
+    <div className={cssStyle} onClick={selectLetter} onKeyDown={selectLetter}>
       {keyValue}
     </div>
   );

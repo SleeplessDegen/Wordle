@@ -24,7 +24,6 @@ export default function Keyboard() {
 
   useEffect(() => {
     document.addEventListener('keydown', handleUserKeyPress);
-
     return () => {
       document.removeEventListener('keydown', handleUserKeyPress);
     };
@@ -36,12 +35,12 @@ export default function Keyboard() {
         <div key={indexRow} className="keyboard__row">
           {keys.split('').map((keyValue, index) => (
             <>
-              {isPrintingEnterKey(indexRow, index) && (
-                <Key big={true} key={index + 'ENTER'} keyValue="ENTER"></Key>
-              )}
-              <Key big={false} key={index + keyValue} keyValue={keyValue}></Key>
               {isPrintingDeleteKey(indexRow, index) && (
                 <Key big={true} key={index + 'DELETE'} keyValue="DELETE"></Key>
+              )}
+              <Key big={false} key={index + keyValue} keyValue={keyValue}></Key>
+              {isPrintingEnterKey(indexRow, index) && (
+                <Key big={true} key={index + 'ENTER'} keyValue="ENTER"></Key>
               )}
             </>
           ))}
@@ -52,9 +51,9 @@ export default function Keyboard() {
 }
 
 function isPrintingEnterKey(indexRow, index) {
-  return indexRow === 2 && index === 0;
+  return indexRow === 2 && index === 6;
 }
 
 function isPrintingDeleteKey(indexRow, index) {
-  return indexRow === 2 && index === 6;
+  return indexRow === 2 && index === 0;
 }

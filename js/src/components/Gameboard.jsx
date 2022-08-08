@@ -54,7 +54,6 @@ export default function Gameboard() {
 }
 
 // Falls spielfeld angaben nicht mitgegeben werden, wird der default genommen. 6x5
-
 export function createDefaultGameboard({ row = 6, column = 5 }) {
   return new Array(row).fill('').map(() => new Array(column).fill(''));
 }
